@@ -9,23 +9,13 @@
         </tr>
     </thead>
     <tbody>
-        <tr>
-            <th scope="row">Chicken Breast Chunks</th>
-            <td>0</td>
-            <td>3</td>
-            <td>Mar 31st</td>
-        </tr>
-        <tr>
-            <th scope="row">Parmigiano Reggiano</th>
-            <td>0</td>
-            <td>2</td>
-            <td>Apr 2021</td>
-        </tr>
-        <tr>
-            <th scope="row">Waitrose Linguine</th>
-            <td>0</td>
-            <td>2</td>
-            <td>Sept 2020</td>
-        </tr>
+        {{#each @model.items as |item|}}
+            <tr>
+                <th scope="row">{{item.name}}</th>
+                <td>{{item.oquant}}</td>
+                <td>{{item.nquant}}</td>
+                <td>{{item.exp_date}}</td>
+            </tr>
+        {{/each}}
     </tbody>
 </table>
