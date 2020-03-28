@@ -23,3 +23,6 @@ yarn-error.log
 .node_modules.ember-try/
 bower.json.ember-try
 package.json.ember-try
+
+.vagrant
+ubuntu-bionic-18.04-cloudimg-console.log
