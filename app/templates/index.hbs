@@ -6,16 +6,40 @@
             <th scope="col">Opened Quantity</th>
             <th scope="col">Unopened Quantity</th>
             <th scope="col">Expiry Dates</th>
+            <th scope="col">Edit</th>
         </tr>
     </thead>
     <tbody>
-        {{#each this.inventoryItems as |item|}}
+        {{#if this.inventoryItems}}
+            {{#each this.inventoryItems as |item|}}
+                <tr>
+                    <th scope="row">{{item.name}}</th>
+                    <td>{{item.oquant}}</td>
+                    <td>{{item.nquant}}</td>
+                    <td>{{item.exp_date}}</td>
+                    <td>
+                        <button type="button" class="btn btn-danger">Update</button>
+                    </td>
+                </tr>
+            {{/each}}
+        {{else}}
             <tr>
-                <th scope="row">{{item.name}}</th>
-                <td>{{item.oquant}}</td>
-                <td>{{item.nquant}}</td>
-                <td>{{item.exp_date}}</td>
+                <td>
+                    <Input @value={{this.newName}} class="form-control" placeholder="Name" />
+                </td>
+                <td>
+                    <Input @value={{this.newOquant}} type="number" class="form-control" placeholder="Opened" />
+                </td>
+                <td>
+                    <Input @value={{this.newNquant}} type="number" class="form-control" placeholder="Unopened" />
+                </td>
+                <td>
+                    <Input @value={{this.newExpDate}} class="form-control" placeholder="Expiry dates" />
+                </td>
+                <td>
+                    <button type="button" class="btn btn-primary" {{on 'click' this.createNewItem}}>Add</button>
+                </td>
             </tr>
-        {{/each}}
+        {{/if}}
     </tbody>
 </table>
