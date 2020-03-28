@@ -65,7 +65,7 @@ export default class IndexController extends Controller {
     }
 
     @action
-    createNewItem() {
+    async createNewItem() {
         let newItem = {
             name: this.newItemName,
             oquant: this.newItemOquant,
@@ -74,6 +74,13 @@ export default class IndexController extends Controller {
         };
         this.model.items.push(newItem);
         this.searchString = '';
+        const response = await (await fetch('http://localhost:3000/', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(newItem)
+        })).json();
     }
 
     @action
