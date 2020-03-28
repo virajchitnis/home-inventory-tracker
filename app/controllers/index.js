@@ -4,6 +4,9 @@ import { action } from "@ember/object";
 
 export default class IndexController extends Controller {
     @tracked
+    items = this.model.items;
+
+    @tracked
     searchString = '';
 
     @tracked
@@ -16,7 +19,7 @@ export default class IndexController extends Controller {
     newItemExpDate = '';
 
     get inventoryItems() {
-        let filteredItems = this.model.items.filter(({name}) => name.toLowerCase().includes(this.searchString.toLowerCase()));
+        let filteredItems = this.items.filter(({name}) => name.toLowerCase().includes(this.searchString.toLowerCase()));
         return filteredItems;
     }
 
@@ -71,5 +74,40 @@ export default class IndexController extends Controller {
         };
         this.model.items.push(newItem);
         this.searchString = '';
+    }
+
+    @action
+    itemEditingMode(item) {
+        this.newItemOquant = item.oquant;
+        this.newItemNquant = item.nquant;
+        this.newItemExpDate = item.exp_date;
+
+        let newItemsList = [];
+        this.items.forEach((obj) => {
+            if (obj === item) {
+                obj.editing = true;
+            }
+            newItemsList.push(obj);
+        });
+        this.items = newItemsList;
+    }
+
+    @action
+    updateItem(item) {
+        let newItemsList = [];
+        this.items.forEach((obj) => {
+            if (obj === item) {
+                let newItem = {
+                    name: item.name,
+                    oquant: this.newItemOquant,
+                    nquant: this.newItemNquant,
+                    exp_date: this.newItemExpDate
+                };
+                newItemsList.push(newItem);
+            } else {
+                newItemsList.push(obj);
+            }
+        });
+        this.items = newItemsList;
     }
 }
