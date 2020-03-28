@@ -72,7 +72,12 @@ export default class IndexController extends Controller {
             nquant: this.newItemNquant,
             exp_date: this.newItemExpDate
         };
-        this.model.items.push(newItem);
+        let newItemsList = [];
+        this.items.forEach((obj) => {
+            newItemsList.push(obj);
+        });
+        newItemsList.push(newItem);
+        this.items = newItemsList;
         this.searchString = '';
         const response = await (await fetch('http://localhost:3000/', {
             method: 'POST',
