@@ -1,4 +1,4 @@
-<input type="text" class="form-control" placeholder="Search...">
+<Input @value={{this.searchText}} class="form-control" placeholder="Search..." />
 <table class="table table-striped table-bordered table-dark">
     <thead class="thead-dark">
         <tr>
@@ -9,7 +9,7 @@
         </tr>
     </thead>
     <tbody>
-        {{#each @model.items as |item|}}
+        {{#each this.inventoryItems as |item|}}
             <tr>
                 <th scope="row">{{item.name}}</th>
                 <td>{{item.oquant}}</td>
