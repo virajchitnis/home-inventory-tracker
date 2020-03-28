@@ -100,11 +100,12 @@ export default class IndexController extends Controller {
     }
 
     @action
-    updateItem(item) {
+    async updateItem(item) {
+        let newItem = {};
         let newItemsList = [];
         this.items.forEach((obj) => {
             if (obj === item) {
-                let newItem = {
+                newItem = {
                     name: item.name,
                     oquant: this.newItemOquant,
                     nquant: this.newItemNquant,
@@ -116,5 +117,12 @@ export default class IndexController extends Controller {
             }
         });
         this.items = newItemsList;
+        const response = await (await fetch('http://localhost:3000/', {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(newItem)
+        })).json();
     }
 }

@@ -34,4 +34,10 @@ router.post('/', function(req, res, next) {
   res.json(req.body);
 });
 
+router.put('/', function(req, res, next) {
+  var itemIndex = items.findIndex(({name}) => name === req.body.name);
+  items.splice(itemIndex, 1, req.body);
+  res.json(req.body);
+});
+
 module.exports = router;
