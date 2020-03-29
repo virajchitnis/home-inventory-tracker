@@ -2,6 +2,8 @@ import Controller from '@ember/controller';
 import { tracked } from "@glimmer/tracking";
 import { action } from "@ember/object";
 
+const API_URL = 'http://localhost:3000/';
+
 export default class IndexController extends Controller {
     @tracked
     items = this.model.items;
@@ -79,7 +81,7 @@ export default class IndexController extends Controller {
         newItemsList.push(newItem);
         this.items = newItemsList;
         this.searchString = '';
-        const response = await (await fetch('http://localhost:3000/', {
+        const response = await (await fetch(API_URL, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -122,7 +124,7 @@ export default class IndexController extends Controller {
             }
         });
         this.items = newItemsList;
-        const response = await (await fetch('http://localhost:3000/', {
+        const response = await (await fetch(API_URL, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json'
